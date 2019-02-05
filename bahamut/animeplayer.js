@@ -5365,7 +5365,7 @@ function t(e, n, i) {
 
                     function s(t, e, n) {
                         var i = Math.ceil(e - n.currentTime());
-                        i = 0;
+                        i = 15;
                         i > 0 ? t.innerHTML = "廣告 " + d.toFixedDigits(i, 2) + " 秒，如何消除廣告？" : c.hasClass(t, "enabled") || (c.addClass(t, "enabled"), t.innerHTML = "點此跳過廣告")
                     }
                     var a, l = this;
