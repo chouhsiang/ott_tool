@@ -48,7 +48,15 @@ function Streaming() {
                             this.subtitles.length = 0;
                         }
                         
-                        data.data.subtitleList = [{name: "中文", url: "https://edge01p.video.friday.tw/" + params.streamingId + ".cht.vtt";}];
+                        var subtitleUrl = "http://" + new URL(this.url).hostname + "/" + params.streamingId + ".cht.vtt";
+                        $.ajax({
+                            type: "HEAD",
+                            url: subtitleUrl,
+                            async: false,
+                            success: function() {
+                                data.data.subtitleList = [{name: "中文", url: subtitleUrl}];
+                            }
+                        });
                         if (data.data.subtitleList) {
                         	if(data.data.subtitleList.length == 0){
                                 $('.p-caption').hide();
