@@ -48,19 +48,7 @@ function Streaming() {
                             this.subtitles.length = 0;
                         }
                         
-                        var subtitleUrl = "https://edge01p.video.friday.tw/" + params.streamingId + ".cht.vtt";
-                        $.ajax({
-                            type: "HEAD",
-                            url: subtitleUrl,
-                            async: false,
-                            success: function() {
-                                alert('success');
-                                data.data.subtitleList = [{name: "中文", url: subtitleUrl}];
-                            },
-                            error: function() {
-                                alert('error');
-                            } 
-                        });
+                        data.data.subtitleList = [{name: "中文", url: "https://edge01p.video.friday.tw/" + params.streamingId + ".cht.vtt";}];
                         if (data.data.subtitleList) {
                         	if(data.data.subtitleList.length == 0){
                                 $('.p-caption').hide();
