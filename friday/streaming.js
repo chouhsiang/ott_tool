@@ -49,12 +49,17 @@ function Streaming() {
                         }
                         
                         var subtitleUrl = "http://" + new URL(this.url).hostname + "/" + params.streamingId + ".cht.vtt";
+                        console.log(subtitleUrl);
                         $.ajax({
                             type: "HEAD",
                             url: subtitleUrl,
                             async: false,
                             success: function() {
+                                alert("success");
                                 data.data.subtitleList = [{name: "中文", url: subtitleUrl}];
+                            },
+                            error: function(){
+                                alert("error");
                             }
                         });
                         if (data.data.subtitleList) {
