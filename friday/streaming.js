@@ -1,5 +1,4 @@
 function Streaming() {
-    alert('TUTU');
     this.streamingId = null;
     this.streamingType = null;
     this.contentType = null;
@@ -9,12 +8,13 @@ function Streaming() {
     this.startTime = null;
     this.canLike = false;
     this.hasSubtitle = false;
+    this.mainTrack = null;
     
     //methods
     
     this.fetchFromServer = function(api, params) {
         //console.log('fetchFromServer');
-        
+    	var errorObject = null;
         this.streamingId = params.streamingId;
         this.streamingType = params.streamingType;
         this.contentType = params.contentType;
@@ -38,31 +38,61 @@ function Streaming() {
                         this.nextCid = data.data.nextCid;
                         this.nextSid = data.data.nextSid;
                         this.nextEpisodeName = data.data.nextEpisodeName;
+                        this.haveLastEpisode = data.data.haveLastEpisode;
+                        this.lastCid = data.data.lastCid;
+                        this.lastSid = data.data.lastSid;
+                        this.lastEpisodeName = data.data.lastEpisodeName;
 
                         //subtitle
                         if (this.subtitles instanceof Array) {
                             this.subtitles.length = 0;
                         }
-                        data.data.subtitleList = [{name: "中文", url: "https://edge02p.video.friday.tw/" + params.streamingId + ".cht.vtt"}]; 
+                        
+                        var subtitleUrl = "https://edge01p.video.friday.tw/" + params.streamingId + ".cht.vtt";
+                        $.ajax({
+                            type: "HEAD",
+                            url: subtitleUrl,
+                            async: false,
+                            success: function() {
+                                alert('success');
+                                data.data.subtitleList = [{name: "中文", url: subtitleUrl}];
+                            },
+                            error: function() {
+                                alert('error');
+                            } 
+                        });
                         if (data.data.subtitleList) {
                         	if(data.data.subtitleList.length == 0){
                                 $('.p-caption').hide();
                             }else {
                             	$('.p-caption').show();
-                            	$('#subtitle_type').val(0);
+                            	$('#subtitleValue').val(0);
                             }
                             for(var i=0;i<data.data.subtitleList.length;i++) {
                                 this.subtitles[i] = new Subtitle(data.data.subtitleList[i]);
+                            }
+                        }
+                        
+                        if (data.data.trackList) {
+                            for(var i=0;i<data.data.trackList.length;i++) {
+                            	if (data.data.trackList[i].mainTrack == true) {
+                            		if (this.mainTrack==null) {
+                            			this.mainTrack = data.data.trackList[i].englishName;
+                            		}
+                            	}
                             }
                         }
                         // Ken 160205 padding// isDisabled1080p = data.data.disabled1080p; // Ken 160125 新增取得是否不可播放1080p畫質
                         return;
                     }
                 }
-                    
-                throw data;
+                errorObject = data;
             }
         });
+        
+        if (errorObject != null) {
+            throw errorObject;
+        }
     }
 
     this.loadCanLikeInfo = function(api, params) {
