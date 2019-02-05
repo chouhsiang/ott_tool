@@ -48,18 +48,13 @@ function Streaming() {
                             this.subtitles.length = 0;
                         }
                         
-                        var subtitleUrl = "http://" + new URL(this.url).hostname + "/" + params.streamingId + ".cht.vtt";
-                        console.log(subtitleUrl);
+                        var subtitleUrl = "https://" + new URL(this.url).hostname + "/" + params.streamingId + ".cht.vtt";
                         $.ajax({
                             type: "HEAD",
                             url: subtitleUrl,
                             async: false,
                             success: function() {
-                                alert("success");
                                 data.data.subtitleList = [{name: "中文", url: subtitleUrl}];
-                            },
-                            error: function(){
-                                alert("error");
                             }
                         });
                         if (data.data.subtitleList) {
