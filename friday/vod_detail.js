@@ -431,7 +431,7 @@ function beforePlayCheck() {
         }
         */
         $("#member-player-popup-modal h4").html(guest_msg);
-        guest_player_popup();
+        //guest_player_popup();
         parent.$.fancybox.close();
     }
 }
