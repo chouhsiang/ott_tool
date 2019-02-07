@@ -69,13 +69,15 @@ $(function(){
     })
 
     $("[data-fancybox='movie']").fancybox({
-        /*beforeClose: function(){
-            recentlyPlay()
-            $('.fancybox-iframe')[0].contentWindow.closePlayer();
+        beforeClose: function(){
+            if (IsLogin()) {
+                recentlyPlay()
+                $('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
-            timeout = setTimeout(function(){   
-    	    },2000);
-        },*/
+                timeout = setTimeout(function(){   
+    	        },2000);
+            }
+        },
         beforeLoad: function(){
             var isEmpty = $(".play-button").attr("isEmpty");
             if (isEmpty == "false"){
@@ -93,15 +95,15 @@ $(function(){
             showOnStart: !0,
             hideOnClosing: !0
         },
-    	/*beforeClose: function(){
- 
+    	beforeClose: function(){
+            if (IsLogin()) {
                 recentlyPlay()
             	$('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
                 timeout = setTimeout(function(){   
     	        },2000);
-            
-        },*/
+            }
+        },
         beforeLoad: function(){
         	beforePlayCheck();
         	
@@ -127,15 +129,15 @@ $(function(){
             showOnStart: !0,
             hideOnClosing: !0
         },
-        /*beforeClose: function(){
-
-                //recentlyPlay()
+        beforeClose: function(){
+            if (IsLogin()) {
+                recentlyPlay()
                 $('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
                 timeout = setTimeout(function(){   
     	        },2000);
-            
-        },*/
+            }
+        },
         beforeLoad: function(e, t) {
         	beforePlayCheck();
         	
@@ -407,7 +409,6 @@ function beforePlayCheck() {
         $('.pmt').each(function(){
            pmtList +=  $('.pmt').html()+",";
         })
-        /*
         if(pmtList.indexOf('免費') >= 0 && popup_msg){
             guest_msg = "請登入後，可觀看免費影片";
             popup_msg = 0;
@@ -427,9 +428,9 @@ function beforePlayCheck() {
             guest_msg = "請登入";
             $("#member-player-popup-modal .go-packages").hide();
         }
-        */
+        
         $("#member-player-popup-modal h4").html(guest_msg);
-        //guest_player_popup();
+        guest_player_popup();
         parent.$.fancybox.close();
     }
 }
