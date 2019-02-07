@@ -409,6 +409,7 @@ function beforePlayCheck() {
         $('.pmt').each(function(){
            pmtList +=  $('.pmt').html()+",";
         })
+        /*
         if(pmtList.indexOf('免費') >= 0 && popup_msg){
             guest_msg = "請登入後，可觀看免費影片";
             popup_msg = 0;
@@ -428,7 +429,7 @@ function beforePlayCheck() {
             guest_msg = "請登入";
             $("#member-player-popup-modal .go-packages").hide();
         }
-        
+        */
         $("#member-player-popup-modal h4").html(guest_msg);
         guest_player_popup();
         parent.$.fancybox.close();
