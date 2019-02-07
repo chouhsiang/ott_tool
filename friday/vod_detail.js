@@ -70,13 +70,11 @@ $(function(){
 
     $("[data-fancybox='movie']").fancybox({
         beforeClose: function(){
-            if (IsLogin()) {
-                recentlyPlay()
-                $('.fancybox-iframe')[0].contentWindow.closePlayer();
+            recentlyPlay()
+            $('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
-                timeout = setTimeout(function(){   
-    	        },2000);
-            }
+            timeout = setTimeout(function(){   
+    	    },2000);
         },
         beforeLoad: function(){
             var isEmpty = $(".play-button").attr("isEmpty");
@@ -96,13 +94,13 @@ $(function(){
             hideOnClosing: !0
         },
     	beforeClose: function(){
-            if (IsLogin()) {
+ 
                 recentlyPlay()
             	$('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
                 timeout = setTimeout(function(){   
     	        },2000);
-            }
+            
         },
         beforeLoad: function(){
         	beforePlayCheck();
@@ -130,13 +128,13 @@ $(function(){
             hideOnClosing: !0
         },
         beforeClose: function(){
-            if (IsLogin()) {
+
                 recentlyPlay()
                 $('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
                 timeout = setTimeout(function(){   
     	        },2000);
-            }
+            
         },
         beforeLoad: function(e, t) {
         	beforePlayCheck();
