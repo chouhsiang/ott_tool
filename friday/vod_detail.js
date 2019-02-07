@@ -70,7 +70,7 @@ $(function(){
 
     $("[data-fancybox='movie']").fancybox({
         beforeClose: function(){
-            recentlyPlay()
+            //recentlyPlay()
             $('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
             timeout = setTimeout(function(){   
@@ -95,7 +95,7 @@ $(function(){
         },
     	beforeClose: function(){
  
-                recentlyPlay()
+                //recentlyPlay()
             	$('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
                 timeout = setTimeout(function(){   
@@ -129,7 +129,7 @@ $(function(){
         },
         beforeClose: function(){
 
-                recentlyPlay()
+                //recentlyPlay()
                 $('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
                 timeout = setTimeout(function(){   
