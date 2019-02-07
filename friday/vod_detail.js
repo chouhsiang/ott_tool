@@ -69,13 +69,13 @@ $(function(){
     })
 
     $("[data-fancybox='movie']").fancybox({
-        beforeClose: function(){
-            //recentlyPlay()
+        /*beforeClose: function(){
+            recentlyPlay()
             $('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
             timeout = setTimeout(function(){   
     	    },2000);
-        },
+        },*/
         beforeLoad: function(){
             var isEmpty = $(".play-button").attr("isEmpty");
             if (isEmpty == "false"){
@@ -93,15 +93,15 @@ $(function(){
             showOnStart: !0,
             hideOnClosing: !0
         },
-    	beforeClose: function(){
+    	/*beforeClose: function(){
  
-                //recentlyPlay()
+                recentlyPlay()
             	$('.fancybox-iframe')[0].contentWindow.closePlayer();
                 
                 timeout = setTimeout(function(){   
     	        },2000);
             
-        },
+        },*/
         beforeLoad: function(){
         	beforePlayCheck();
         	
@@ -127,7 +127,7 @@ $(function(){
             showOnStart: !0,
             hideOnClosing: !0
         },
-        beforeClose: function(){
+        /*beforeClose: function(){
 
                 //recentlyPlay()
                 $('.fancybox-iframe')[0].contentWindow.closePlayer();
@@ -135,7 +135,7 @@ $(function(){
                 timeout = setTimeout(function(){   
     	        },2000);
             
-        },
+        },*/
         beforeLoad: function(e, t) {
         	beforePlayCheck();
         	
