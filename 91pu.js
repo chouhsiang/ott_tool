@@ -361,9 +361,48 @@ function checkLogin(func) {
 			func = initPage;
 		} catch (e) {}
 	}
-  data = {"done":"ok","islogin":true,"nickname":"韓國瑜","username":"韓國瑜","isadmin":false,"uid":0,"face":"","email":"","point":0,"vip_expired_d":"2099-12-12","vertify_email":0,"monthly_vip":1,"reg_gift":0,"jointime":"2099-12-12 21:58:54","level":3,"cfg":{"ad":0,"fav":"10","st":"-1","fs":0,"sts":1,"ass":0,"dl":0,"sus":0,"ut":"1","uc":0,"cc":0,"tn":0,"bt":0}};
-  saveAccountLevel(data.level);
-	uinfo = data;
+	$.ajax({
+		type: ajaxtype,
+		url: ajaxpath + 'ajaxapi/getuserinfo.php',
+		contentType: ajaxct,
+		dataType: ajaxdt,
+		success: function (data) {
+			if (data.done == "ok") {
+				if (data.islogin) {
+					/*
+					data.vip_expired_d = "2018-12-12";
+					data.level = 3;
+					data.monthly_vip = 1;
+					data.cfg.sts = 1;
+					*/
+					data.vip_expired_d = "2099-12-12";
+					data.level = 3;
+					data.monthly_vip = 1;
+					data.cfg.sts = 1;
+                    			data.cfg.st = -1;
+					saveAccountLevel(data.level);
+					uinfo = data;
+					try {
+						func(true, data);
+					} catch (e) {}
+					initShowHead(true, data);
+				} else {
+					try {
+						func(false);
+					} catch (e) {}
+					initShowHead(false);
+				}
+			} else {
+				try {
+					func(false, data.done);
+				} catch (e) {}
+				initShowHead(false);
+			}
+		},
+		error: function () {
+			alert('獲取用戶資料錯誤！');
+		}
+	});
 }
 
 function initShowHead(isLogin, data) {
